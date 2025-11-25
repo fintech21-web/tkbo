@@ -13,7 +13,7 @@ FILE_ID = "AgACAgQAAxkBAAMbaSWTUbtSyaaO4nk7uY39DDptUOAAAsMLaxvFeSlRKhnYtBpPTJMBA
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
-        "የካናዳ ፕሮሰስ በ ስራ እና ክህሎት ሚንስቴር በኩል ለመጀመር የመመዝገቢያ ክፍያዎን ይክፈሉ። "
+        "የካናዳ ፕሮሰስ በ ስራ እና ክህሎት ሚንስቴር በኩል ለመጀመር የመመዝገቢያ 3,420 ብር ይክፈሉ። "
         "ለመክፈል ይህን ይጫኑ /pay."
     )
 
@@ -22,7 +22,7 @@ async def pay(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # Send image using Telegram file_id
     await update.message.reply_photo(
         photo=FILE_ID,
-        caption=" *የተመደበልክ/ሽ አምባሳደር ወይም ህጋዊ ወኪል:*",
+        caption=" *የተመደበሎት አምባሳደር ወይም ህጋዊ ወኪል:*",
         parse_mode="Markdown"
     )
 
