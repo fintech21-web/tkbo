@@ -8,11 +8,11 @@ from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 TOKEN = os.getenv("BOT_TOKEN")
 
 # Replace with your direct .jpg or .png URL
-PHOTO_URL = "https://i.imgur.com/yKNBqbk.png"
+PHOTO_URL = "YOUR_DIRECT_IMAGE_LINK_HERE"
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
-        "የካናዳ ፕሮሰስ  በ ስራ እና ክህሎት ሚንስቴር በኩል ለመጀመር የ መመዝገቢያ ክፍያዎን 3420 ብር  ይክፈሉ። "
+        "የካናዳ ፕሮሰስ በ ስራ እና ክህሎት ሚንስቴር በኩል ለመጀመር የመመዝገቢያ ክፍያዎን ይክፈሉ። "
         "ለመክፈል ይህን ይጫኑ /pay."
     )
 
@@ -28,16 +28,16 @@ async def pay(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # Then send text
     message = (
         "እባክህ ክፍያዎን ከታች በተቀመጠው የባንክ አካውንት ይላኩ:\n\n"
-        "🏦 የአካውንት ስም: ሸጋው ታምሩ ተመስገን\n"
-        "💳 የአካውንት ቁጥር : 567592816011\n"
-        "🏦 የ ባንክ ስም : ዳሽን ባንክ\n\n"
+        "🏦 የአካውንት ስም: ዶ/ር አለምነህ ከፍያለው\n"
+        "💳 የአካውንት: 1000489297275\n"
+        "🏦 የባንክ ስም: የኢትዮጵያ ንግድ ባንክ\n\n"
         "ክፍያዎን ከከፈሉ በኋላ የክፍያ ደረሰኙን በ @bkuelmis ይላኩ።"
     )
     await update.message.reply_text(message, parse_mode="Markdown")
 
 
 # --- Flask App to keep Render alive ---
-flask_app = Flask(name)
+flask_app = Flask(__name__)
 
 @flask_app.route('/')
 def home():
