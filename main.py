@@ -2,7 +2,7 @@ import os
 import threading
 from flask import Flask
 from telegram import Update
-from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
+from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes, MessageHandler, filters
 
 # --- Telegram Bot Setup ---
 TOKEN = os.getenv("BOT_TOKEN")
@@ -18,7 +18,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def pay(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # Send image first
     await update.message.reply_photo(
-        photo=open("static/receipt.png", "rb"),
+        photo=open("static/receipt.png", "rb"),  # you can replace with file_id later
         caption="💰 *የመክፈያ መመሪያ:*",
         parse_mode="Markdown"
     )
@@ -32,6 +32,15 @@ async def pay(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "ክፍያዎን ከከፈሉ በኋላ የክፍያ ደረሰኙን በ @bkuelmis ይላኩ።"
     )
     await update.message.reply_text(message, parse_mode="Markdown")
+
+
+# --- Get file_id command ---
+async def get_file_id(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if update.message.photo:
+        largest = update.message.photo[-1]  # get the largest version
+        await update.message.reply_text(f"File ID: {largest.file_id}")
+    else:
+        await update.message.reply_text("እባክህ አንድ ፎቶ ላክ።")
 
 
 # --- Flask App to keep Render alive ---
@@ -54,5 +63,7 @@ print("Starting Telegram bot...")
 app = ApplicationBuilder().token(TOKEN).build()
 app.add_handler(CommandHandler("start", start))
 app.add_handler(CommandHandler("pay", pay))
+app.add_handler(CommandHandler("get_file_id", get_file_id))  # new command
+app.add_handler(MessageHandler(filters.PHOTO, get_file_id))  # optional auto-get file_id on photo
 
 app.run_polling()
