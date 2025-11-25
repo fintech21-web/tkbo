@@ -22,16 +22,17 @@ async def pay(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # Send image using Telegram file_id
     await update.message.reply_photo(
         photo=FILE_ID,
-        caption="💰 *የመክፈያ መመሪያ:*",
+        caption=" *የተመደበልክ አምባሳደር ወይም ህጋዊ ወኪል:*",
         parse_mode="Markdown"
     )
 
     # Then send text instructions
     message = (
-        "እባክህ ክፍያዎን ከታች በተቀመጠው የባንክ አካውንት ይላኩ:\n\n"
-        "🏦 የአካውንት ስም: ዶ/ር አለምነህ ከፍያለው\n"
-        "💳 የአካውንት: 1000489297275\n"
-        "🏦 የባንክ ስም: የኢትዮጵያ ንግድ ባንክ\n\n"
+        "💰 የመክፈያ መመሪያ:\n\n"
+        "ክፍያዎን ከታች በተቀመጠው የባንክ አካውንት ይላኩ:\n\n"
+        "🏦 የአካውንት ስም: ሸጋው ታምሩ ተመስገን\n"
+        "💳 የአካውንት: 567592816011\n"
+        "🏦 የባንክ ስም: ዳሽን ባንክ\n\n"
         "ክፍያዎን ከከፈሉ በኋላ የክፍያ ደረሰኙን በ @bkuelmis ይላኩ።"
     )
     await update.message.reply_text(message, parse_mode="Markdown")
