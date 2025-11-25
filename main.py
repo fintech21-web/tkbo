@@ -7,8 +7,6 @@ from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 # --- Telegram Bot Setup ---
 TOKEN = os.getenv("BOT_TOKEN")
 
-# Replace with your direct .jpg or .png URL
-PHOTO_URL = "https://i.imgur.com/yKNBqbk.png"
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
@@ -20,9 +18,11 @@ async def pay(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     # Send image first
     await update.message.reply_photo(
-        photo=PHOTO_URL,
-        caption="💰 *የመክፈያ መመሪያ:*",
-        parse_mode="Markdown"
+    photo=open("static/receipt.png", "rb"),
+    caption="💰 *የመክፈያ መመሪያ:*",
+    parse_mode="Markdown"
+)
+
     )
 
     # Then send text
