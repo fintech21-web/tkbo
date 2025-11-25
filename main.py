@@ -6,7 +6,9 @@ from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 
 # --- Telegram Bot Setup ---
 TOKEN = os.getenv("BOT_TOKEN")
-PHOTO_URL = "https://i.imgur.com/yKNBqbk.png"   # <<--- Replace with .jpg/.png link
+
+# Replace with your direct .jpg or .png URL
+PHOTO_URL = "https://i.imgur.com/yKNBqbk.png"
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
@@ -16,24 +18,25 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def pay(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
-    # --- Send Photo First ---
+    # Send image first
     await update.message.reply_photo(
         photo=PHOTO_URL,
         caption="💰 *የመክፈያ መመሪያ:*",
         parse_mode="Markdown"
     )
 
-    # --- Then Send Payment Details ---
+    # Then send text
     message = (
-        "እባክህ ክፍያዎን ከታች በተቀመጠው የ ባንክ አካውንት ይላኩ:\n\n"
-        "🏦 የ አካውንት ስም : ዶ/ር ሸጋው ታምሩ ተመስገን\n"
-        "💳 አካውንት ቁጥር : 567592816011\n"
+        "እባክህ ክፍያዎን ከታች በተቀመጠው የባንክ አካውንት ይላኩ:\n\n"
+        "🏦 የአካውንት ስም: ሸጋው ታምሩ ተመስገን\n"
+        "💳 የአካውንት ቁጥር : 567592816011\n"
         "🏦 የ ባንክ ስም : ዳሽን ባንክ\n\n"
-        "ክፍያዎን ከከፈሉ በኋላ የክፍያ ደረሰኙኝ በዚህ የ telegram Link @bkuelmis ይላኩ።"
+        "ክፍያዎን ከከፈሉ በኋላ የክፍያ ደረሰኙን በ @bkuelmis ይላኩ።"
     )
     await update.message.reply_text(message, parse_mode="Markdown")
 
-# --- Flask App (for Render uptime) ---
+
+# --- Flask App to keep Render alive ---
 flask_app = Flask(__name__)
 
 @flask_app.route('/')
@@ -44,12 +47,15 @@ def run_flask():
     port = int(os.environ.get("PORT", 10000))
     flask_app.run(host="0.0.0.0", port=port)
 
-# Start Flask in a background thread
 threading.Thread(target=run_flask, daemon=True).start()
+
 
 # --- Start Telegram Bot ---
 print("Starting Telegram bot...")
+
 app = ApplicationBuilder().token(TOKEN).build()
+
 app.add_handler(CommandHandler("start", start))
 app.add_handler(CommandHandler("pay", pay))
+
 app.run_polling()
