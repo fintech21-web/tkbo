@@ -8,7 +8,7 @@ from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 TOKEN = os.getenv("BOT_TOKEN")
 
 # Replace with your direct .jpg or .png URL
-PHOTO_URL = "YOUR_DIRECT_IMAGE_LINK_HERE"
+PHOTO_URL = "https://i.imgur.com/yKNBqbk.png"
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
