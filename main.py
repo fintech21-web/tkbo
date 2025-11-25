@@ -7,6 +7,9 @@ from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes, Messa
 # --- Telegram Bot Setup ---
 TOKEN = os.getenv("BOT_TOKEN")
 
+# Telegram file_id for the receipt image
+FILE_ID = "AgACAgQAAxkBAAMbaSWTUbtSyaaO4nk7uY39DDptUOAAAsMLaxvFeSlRKhnYtBpPTJMBAAMCAAN5AAM2BA"
+
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
@@ -16,14 +19,14 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 async def pay(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    # Send image first
+    # Send image using Telegram file_id
     await update.message.reply_photo(
-        photo=open("static/receipt.png", "rb"),  # you can replace with file_id later
+        photo=FILE_ID,
         caption="💰 *የመክፈያ መመሪያ:*",
         parse_mode="Markdown"
     )
 
-    # Then send text
+    # Then send text instructions
     message = (
         "እባክህ ክፍያዎን ከታች በተቀመጠው የባንክ አካውንት ይላኩ:\n\n"
         "🏦 የአካውንት ስም: ዶ/ር አለምነህ ከፍያለው\n"
@@ -63,7 +66,7 @@ print("Starting Telegram bot...")
 app = ApplicationBuilder().token(TOKEN).build()
 app.add_handler(CommandHandler("start", start))
 app.add_handler(CommandHandler("pay", pay))
-app.add_handler(CommandHandler("get_file_id", get_file_id))  # new command
+app.add_handler(CommandHandler("get_file_id", get_file_id))
 app.add_handler(MessageHandler(filters.PHOTO, get_file_id))  # optional auto-get file_id on photo
 
 app.run_polling()
