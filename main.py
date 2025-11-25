@@ -14,15 +14,13 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "ለመክፈል ይህን ይጫኑ /pay."
     )
 
-async def pay(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
+async def pay(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # Send image first
     await update.message.reply_photo(
-    photo=open("static/receipt.png", "rb"),
-    caption="💰 *የመክፈያ መመሪያ:*",
-    parse_mode="Markdown"
-)
-
+        photo=open("static/receipt.png", "rb"),
+        caption="💰 *የመክፈያ መመሪያ:*",
+        parse_mode="Markdown"
     )
 
     # Then send text
@@ -54,7 +52,6 @@ threading.Thread(target=run_flask, daemon=True).start()
 print("Starting Telegram bot...")
 
 app = ApplicationBuilder().token(TOKEN).build()
-
 app.add_handler(CommandHandler("start", start))
 app.add_handler(CommandHandler("pay", pay))
 
