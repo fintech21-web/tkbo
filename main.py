@@ -22,7 +22,7 @@ async def pay(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # Send image using Telegram file_id
     await update.message.reply_photo(
         photo=FILE_ID,
-        caption=" *የተመደበልክ አምባሳደር ወይም ህጋዊ ወኪል:*",
+        caption=" *የተመደበልክ/ሽ አምባሳደር ወይም ህጋዊ ወኪል:*",
         parse_mode="Markdown"
     )
 
