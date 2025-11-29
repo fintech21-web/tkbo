@@ -9,7 +9,7 @@ TOKEN = os.getenv("BOT_TOKEN")
 
 # Telegram file_id for the receipt image
 FILE_ID = "AgACAgQAAxkBAAMbaSWTUbtSyaaO4nk7uY39DDptUOAAAsMLaxvFeSlRKhnYtBpPTJMBAAMCAAN5AAM2BA"
-
+FILE_ID2 = "AgACAgQAAxkBAANSaSruVVLPa9HZ4xpOuKxQ812cYsgAAlsMaxtiBlBRJ5bdl0STQcEBAAMCAAN5AAM2BA"
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
@@ -25,6 +25,11 @@ async def pay(update: Update, context: ContextTypes.DEFAULT_TYPE):
         caption=" *የተመደበሎት አምባሳደር ወይም ህጋዊ ወኪል:*",
         parse_mode="Markdown"
     )
+# Send second image using Telegram file_id 
+    await update.message.reply_photo( 
+        photo=FILE_ID2, 
+        caption=" *የተጨማሪ ምስል መረጃ:*", 
+        parse_mode="Markdown" )
 
     # Then send text instructions
     message = (
